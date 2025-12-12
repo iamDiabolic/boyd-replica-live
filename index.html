@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boyd — Authentic Art Marketplace</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0e0e0e; color: #fff; overflow-x: hidden; min-height: 100vh; }
+        .page { position: relative; width: 100%; min-height: 100vh; overflow: hidden; }
+        .content { position: relative; z-index: 10; padding: 60px 40px; max-width: 1400px; margin: 0 auto; }
+        .h1 { font-size: clamp(60px, 12vw, 180px); font-weight: 300; line-height: 0.9; text-transform: lowercase; letter-spacing: -0.02em; display: block; opacity: 0; transform: translateY(50px); animation: fadeInUp 0.8s ease forwards; }
+        .h1:nth-child(1) { animation-delay: 0.2s; }
+        .wrapper .h1 { animation-delay: 0.4s; }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        .wrapper { margin-top: 20px; }
+        .inner { margin-top: 60px; max-width: 600px; opacity: 0; transform: translateY(30px); animation: fadeInUp 0.8s ease forwards 0.6s; }
+        .caption { font-size: clamp(18px, 2.5vw, 28px); font-weight: 300; line-height: 1.4; display: block; margin-bottom: 20px; opacity: 0.9; }
+        .description { font-size: clamp(16px, 2vw, 22px); font-weight: 300; line-height: 1.6; opacity: 0.7; margin-top: 15px; }
+        .button-wrapper { position: relative; display: inline-block; margin-top: 30px; }
+        .email-link { color: #fff; text-decoration: none; font-size: clamp(18px, 2.5vw, 28px); font-weight: 400; display: inline-block; transition: transform 0.3s ease; }
+        .email-link:hover { transform: translateX(10px); }
+        .icon-wrapper { position: absolute; right: -140px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+        .arrow-path { stroke-dasharray: 200; stroke-dashoffset: 200; transition: stroke-dashoffset 0.6s ease; }
+        .email-link:hover ~ .icon-wrapper .arrow-path { stroke-dashoffset: 0; }
+        .canvas-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        .clouds-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none; }
+        .ticker-wrapper { position: absolute; width: 200%; height: 100%; display: flex; align-items: center; }
+        .ticker { display: flex; animation: scroll 60s linear infinite; }
+        .ticker-1 { top: 15%; animation-duration: 80s; }
+        .ticker-2 { top: 45%; animation-duration: 100s; }
+        .ticker-3 { top: 70%; animation-duration: 90s; }
+        .cloud-shape { width: clamp(200px, 25vw, 500px); height: clamp(100px, 15vw, 300px); background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.15) 0%, transparent 70%); border-radius: 50%; margin-right: 300px; filter: blur(40px); position: relative; }
+        .cloud-shape::before, .cloud-shape::after { content: ''; position: absolute; background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%); border-radius: 50%; filter: blur(30px); }
+        .cloud-shape::before { width: 60%; height: 80%; top: -20%; left: 20%; }
+        .cloud-shape::after { width: 70%; height: 90%; bottom: -20%; right: 15%; }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @media (max-width: 768px) { .content { padding: 40px 20px; } .icon-wrapper { display: none; } }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <div class="content">
+            <span class="h1">coming</span>
+            <div class="wrapper">
+                <span class="h1">soon</span>
+                <div class="inner">
+                    <div class="description-wrapper">
+                        <span class="caption">Online<br>gallery</span>
+                        <p class="description">we are currently working on something awesome.</p>
+                    </div>
+                    <div class="button-wrapper">
+                        <a href="mailto:gallery@boyd.ae" class="email-link">gallery@boyd.ae</a>
+                        <div class="icon-wrapper">
+                            <svg width="122" height="124" viewBox="0 0 122 124" fill="none">
+                                <path class="arrow-path" d="M1 -1.5C0.333333 15.1667 5 54.8714 37 85.5C68.3433 115.5 101 120.5 126 120.5" stroke="#FF0000" stroke-width="3" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <canvas id="canvas" class="canvas-layer"></canvas>
+        <div class="clouds-container">
+            <div class="ticker-wrapper ticker-1"><div class="ticker"><div class="cloud-shape"></div><div class="cloud-shape"></div><div class="cloud-shape"></div></div></div>
+            <div class="ticker-wrapper ticker-2"><div class="ticker"><div class="cloud-shape"></div><div class="cloud-shape"></div><div class="cloud-shape"></div></div></div>
+            <div class="ticker-wrapper ticker-3"><div class="ticker"><div class="cloud-shape"></div><div class="cloud-shape"></div><div class="cloud-shape"></div></div></div>
+        </div>
+    </main>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        class Particle {
+            constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.size = Math.random() * 2 + 0.5; this.speedX = Math.random() * 0.5 - 0.25; this.speedY = Math.random() * 0.5 - 0.25; this.opacity = Math.random() * 0.3; }
+            update() { this.x += this.speedX; this.y += this.speedY; if (this.x > canvas.width) this.x = 0; if (this.x < 0) this.x = canvas.width; if (this.y > canvas.height) this.y = 0; if (this.y < 0) this.y = canvas.height; }
+            draw() { ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+        }
+        const particles = []; for (let i = 0; i < 50; i++) particles.push(new Particle());
+        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        animate();
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX / window.innerWidth; const mouseY = e.clientY / window.innerHeight;
+            document.querySelectorAll('.ticker-wrapper').forEach((ticker, i) => {
+                const speed = (i + 1) * 15; const offsetX = (mouseX - 0.5) * speed; const offsetY = (mouseY - 0.5) * speed;
+                ticker.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
