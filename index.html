@@ -1,44 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="lenis">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boyd — Authentic Art Marketplace</title>
+    <meta name="description" content="BOYD is the first UAE based authentic art marketplace with a global art selection. Fall in love with a new artwork for your collection, or connect gallery owners to your iconic art.">
+    <meta name="theme-color" content="#0e0e0e">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0e0e0e; color: #fff; overflow-x: hidden; min-height: 100vh; }
+        html, body { width: 100%; height: 100%; overflow-x: hidden; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background-color: #0e0e0e; color: #ffffff; position: relative; }
+        
+        /* Social Links */
+        .social-links { position: fixed; top: 40px; right: 40px; z-index: 100; display: flex; gap: 20px; }
+        .social-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 14px; transition: color 0.3s; }
+        .social-links a:hover { color: #ffffff; }
+        
+        /* Main Page */
         .page { position: relative; width: 100%; min-height: 100vh; overflow: hidden; }
-        .content { position: relative; z-index: 10; padding: 60px 40px; max-width: 1400px; margin: 0 auto; }
-        .h1 { font-size: clamp(60px, 12vw, 180px); font-weight: 300; line-height: 0.9; text-transform: lowercase; letter-spacing: -0.02em; display: block; opacity: 0; transform: translateY(50px); animation: fadeInUp 0.8s ease forwards; }
-        .h1:nth-child(1) { animation-delay: 0.2s; }
-        .wrapper .h1 { animation-delay: 0.4s; }
+        .content { position: relative; z-index: 10; padding: 80px 60px; max-width: 1600px; margin: 0 auto; }
+        
+        /* Typography */
+        .h1 { font-size: clamp(80px, 15vw, 220px); font-weight: 300; line-height: 0.85; text-transform: lowercase; letter-spacing: -0.03em; display: block; opacity: 0; transform: translateY(80px); animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .h1:nth-child(1) { animation-delay: 0.3s; }
+        .wrapper { margin-top: 10px; }
+        .wrapper .h1 { animation-delay: 0.5s; }
+        
         @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
-        .wrapper { margin-top: 20px; }
-        .inner { margin-top: 60px; max-width: 600px; opacity: 0; transform: translateY(30px); animation: fadeInUp 0.8s ease forwards 0.6s; }
-        .caption { font-size: clamp(18px, 2.5vw, 28px); font-weight: 300; line-height: 1.4; display: block; margin-bottom: 20px; opacity: 0.9; }
-        .description { font-size: clamp(16px, 2vw, 22px); font-weight: 300; line-height: 1.6; opacity: 0.7; margin-top: 15px; }
-        .button-wrapper { position: relative; display: inline-block; margin-top: 30px; }
-        .email-link { color: #fff; text-decoration: none; font-size: clamp(18px, 2.5vw, 28px); font-weight: 400; display: inline-block; transition: transform 0.3s ease; }
-        .email-link:hover { transform: translateX(10px); }
-        .icon-wrapper { position: absolute; right: -140px; top: 50%; transform: translateY(-50%); pointer-events: none; }
-        .arrow-path { stroke-dasharray: 200; stroke-dashoffset: 200; transition: stroke-dashoffset 0.6s ease; }
+        
+        .inner { margin-top: 80px; max-width: 650px; opacity: 0; transform: translateY(40px); animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.8s; }
+        .description-wrapper { margin-bottom: 50px; }
+        .caption { font-size: clamp(22px, 3vw, 36px); font-weight: 300; line-height: 1.3; display: block; margin-bottom: 25px; opacity: 0.95; letter-spacing: -0.01em; }
+        .description { font-size: clamp(18px, 2.2vw, 26px); font-weight: 300; line-height: 1.5; opacity: 0.65; margin-top: 18px; letter-spacing: -0.005em; }
+        
+        /* Button */
+        .button-wrapper { position: relative; display: inline-block; margin-top: 20px; }
+        .email-link { color: #ffffff; text-decoration: none; font-size: clamp(22px, 3vw, 36px); font-weight: 400; display: inline-block; position: relative; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); letter-spacing: -0.01em; }
+        .email-link:hover { transform: translateX(15px); }
+        .button-inner { position: relative; display: inline-block; overflow: hidden; height: 1.3em; }
+        .button-text, .button-text-hover { display: block; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .email-link:hover .button-text { transform: translateY(-110%); }
+        .button-text-hover { position: absolute; top: 110%; left: 0; }
+        .email-link:hover .button-text-hover { transform: translateY(-110%); }
+        
+        /* Arrow SVG */
+        .icon-wrapper { position: absolute; right: -150px; top: 50%; transform: translateY(-50%); pointer-events: none; opacity: 0; transition: opacity 0.4s; }
+        .email-link:hover ~ .icon-wrapper { opacity: 1; }
+        .arrow-path { stroke-dasharray: 250; stroke-dashoffset: 250; transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .email-link:hover ~ .icon-wrapper .arrow-path { stroke-dashoffset: 0; }
-        .canvas-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
-        .clouds-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none; }
-        .ticker-wrapper { position: absolute; width: 200%; height: 100%; display: flex; align-items: center; }
-        .ticker { display: flex; animation: scroll 60s linear infinite; }
-        .ticker-1 { top: 15%; animation-duration: 80s; }
-        .ticker-2 { top: 45%; animation-duration: 100s; }
-        .ticker-3 { top: 70%; animation-duration: 90s; }
-        .cloud-shape { width: clamp(200px, 25vw, 500px); height: clamp(100px, 15vw, 300px); background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.15) 0%, transparent 70%); border-radius: 50%; margin-right: 300px; filter: blur(40px); position: relative; }
-        .cloud-shape::before, .cloud-shape::after { content: ''; position: absolute; background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%); border-radius: 50%; filter: blur(30px); }
-        .cloud-shape::before { width: 60%; height: 80%; top: -20%; left: 20%; }
-        .cloud-shape::after { width: 70%; height: 90%; bottom: -20%; right: 15%; }
-        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        @media (max-width: 768px) { .content { padding: 40px 20px; } .icon-wrapper { display: none; } }
+        
+        /* Email Label */
+        .email-label { position: absolute; bottom: -50px; left: 0; font-size: 11px; opacity: 0.4; letter-spacing: 0.08em; text-transform: uppercase; }
+        .word { display: inline-block; margin-right: 10px; }
+        
+        /* Canvas */
+        .canvas-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; opacity: 0.6; }
+        
+        /* Clouds */
+        .clouds-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none; overflow: hidden; }
+        .ticker-wrapper { position: absolute; width: 300%; height: 100%; display: flex; align-items: center; will-change: transform; }
+        .ticker { display: flex; animation: scroll linear infinite; }
+        .ticker-1 { top: 12%; animation-duration: 90s; }
+        .ticker-2 { top: 48%; animation-duration: 110s; animation-direction: reverse; }
+        .ticker-3 { top: 75%; animation-duration: 95s; }
+        
+        .cloud-img { width: auto; height: clamp(180px, 22vw, 450px); opacity: 0.12; margin-right: clamp(200px, 25vw, 400px); filter: blur(2px) brightness(1.1); user-select: none; pointer-events: none; }
+        
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-33.333%); } }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .content { padding: 60px 40px; }
+            .social-links { top: 30px; right: 30px; }
+        }
+        
+        @media (max-width: 768px) {
+            .content { padding: 50px 30px; }
+            .inner { margin-top: 60px; }
+            .icon-wrapper { display: none; }
+            .email-label { position: static; margin-top: 30px; display: block; }
+            .social-links { top: 20px; right: 20px; gap: 15px; }
+            .social-links a { font-size: 12px; }
+        }
+        
+        @media (max-width: 480px) {
+            .h1 { font-size: 60px; }
+            .caption { font-size: 24px; }
+            .description { font-size: 18px; }
+            .email-link { font-size: 22px; }
+            .content { padding: 40px 20px; }
+        }
     </style>
 </head>
 <body>
+    <!-- Social Links -->
+    <div class="social-links">
+        <a href="https://www.instagram.com/boyd.ae/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://wa.me/message/DEU5VCMIQ4JLJ1" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+
     <main class="page">
         <div class="content">
             <span class="h1">coming</span>
@@ -50,44 +113,136 @@
                         <p class="description">we are currently working on something awesome.</p>
                     </div>
                     <div class="button-wrapper">
-                        <a href="mailto:gallery@boyd.ae" class="email-link">gallery@boyd.ae</a>
+                        <a href="mailto:gallery@boyd.ae" class="email-link">
+                            <span class="button-inner">
+                                <span class="button-text">gallery@boyd.ae</span>
+                                <span class="button-text-hover">gallery@boyd.ae</span>
+                            </span>
+                        </a>
                         <div class="icon-wrapper">
                             <svg width="122" height="124" viewBox="0 0 122 124" fill="none">
-                                <path class="arrow-path" d="M1 -1.5C0.333333 15.1667 5 54.8714 37 85.5C68.3433 115.5 101 120.5 126 120.5" stroke="#FF0000" stroke-width="3" stroke-linecap="round"/>
+                                <path class="arrow-path" d="M1 -1.5C0.333333 15.1667 5 54.8714 37 85.5C68.3433 115.5 101 120.5 126 120.5" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round"/>
                             </svg>
+                        </div>
+                        <div class="email-label">
+                            <span class="word">E-mail</span>
+                            <span class="word">by</span>
+                            <span class="word">all</span>
+                            <span class="word">Offers</span>
+                            <span class="word">Send</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <canvas id="canvas" class="canvas-layer"></canvas>
+
         <div class="clouds-container">
-            <div class="ticker-wrapper ticker-1"><div class="ticker"><div class="cloud-shape"></div><div class="cloud-shape"></div><div class="cloud-shape"></div></div></div>
-            <div class="ticker-wrapper ticker-2"><div class="ticker"><div class="cloud-shape"></div><div class="cloud-shape"></div><div class="cloud-shape"></div></div></div>
-            <div class="ticker-wrapper ticker-3"><div class="ticker"><div class="cloud-shape"></div><div class="cloud-shape"></div><div class="cloud-shape"></div></div></div>
+            <div class="ticker-wrapper ticker-1">
+                <div class="ticker">
+                    <img src="https://boyd.ae/images/placeholder/cloud_1.webp" alt="Cloud" class="cloud-img">
+                    <img src="https://boyd.ae/images/placeholder/cloud_1.webp" alt="Cloud" class="cloud-img">
+                    <img src="https://boyd.ae/images/placeholder/cloud_1.webp" alt="Cloud" class="cloud-img">
+                </div>
+            </div>
+            <div class="ticker-wrapper ticker-2">
+                <div class="ticker">
+                    <img src="https://boyd.ae/images/placeholder/cloud_2.webp" alt="Cloud" class="cloud-img">
+                    <img src="https://boyd.ae/images/placeholder/cloud_2.webp" alt="Cloud" class="cloud-img">
+                    <img src="https://boyd.ae/images/placeholder/cloud_2.webp" alt="Cloud" class="cloud-img">
+                </div>
+            </div>
+            <div class="ticker-wrapper ticker-3">
+                <div class="ticker">
+                    <img src="https://boyd.ae/images/placeholder/cloud_3.webp" alt="Cloud" class="cloud-img">
+                    <img src="https://boyd.ae/images/placeholder/cloud_3.webp" alt="Cloud" class="cloud-img">
+                    <img src="https://boyd.ae/images/placeholder/cloud_3.webp" alt="Cloud" class="cloud-img">
+                </div>
+            </div>
         </div>
     </main>
+
     <script>
+        // Canvas Particle System
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
-        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
+        
         class Particle {
-            constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.size = Math.random() * 2 + 0.5; this.speedX = Math.random() * 0.5 - 0.25; this.speedY = Math.random() * 0.5 - 0.25; this.opacity = Math.random() * 0.3; }
-            update() { this.x += this.speedX; this.y += this.speedY; if (this.x > canvas.width) this.x = 0; if (this.x < 0) this.x = canvas.width; if (this.y > canvas.height) this.y = 0; if (this.y < 0) this.y = canvas.height; }
-            draw() { ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speedX = Math.random() * 0.3 - 0.15;
+                this.speedY = Math.random() * 0.3 - 0.15;
+                this.opacity = Math.random() * 0.25 + 0.05;
+            }
+            
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            
+            draw() {
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
         }
-        const particles = []; for (let i = 0; i < 50; i++) particles.push(new Particle());
-        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        
+        const particles = [];
+        for (let i = 0; i < 60; i++) {
+            particles.push(new Particle());
+        }
+        
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            requestAnimationFrame(animate);
+        }
         animate();
+        
+        // Mouse Parallax Effect
+        let mouseX = 0.5;
+        let mouseY = 0.5;
+        let currentX = 0.5;
+        let currentY = 0.5;
+        
         document.addEventListener('mousemove', (e) => {
-            const mouseX = e.clientX / window.innerWidth; const mouseY = e.clientY / window.innerHeight;
-            document.querySelectorAll('.ticker-wrapper').forEach((ticker, i) => {
-                const speed = (i + 1) * 15; const offsetX = (mouseX - 0.5) * speed; const offsetY = (mouseY - 0.5) * speed;
+            mouseX = e.clientX / window.innerWidth;
+            mouseY = e.clientY / window.innerHeight;
+        });
+        
+        function updateParallax() {
+            currentX += (mouseX - currentX) * 0.05;
+            currentY += (mouseY - currentY) * 0.05;
+            
+            const tickers = document.querySelectorAll('.ticker-wrapper');
+            tickers.forEach((ticker, index) => {
+                const speed = (index + 1) * 12;
+                const offsetX = (currentX - 0.5) * speed;
+                const offsetY = (currentY - 0.5) * speed;
                 ticker.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
             });
-        });
+            
+            requestAnimationFrame(updateParallax);
+        }
+        updateParallax();
     </script>
 </body>
 </html>
